@@ -2,6 +2,7 @@ name: Update CSM-Operator version
 # reusable workflow
 on:  # yamllint disable-line rule:truthy
   workflow_call:
+  workflow_dispatch:
     inputs:
       latest-version:
         description: 'Version to update operator, ex: v2.0.0'
