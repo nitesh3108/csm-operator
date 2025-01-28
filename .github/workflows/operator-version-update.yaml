@@ -4,11 +4,14 @@ on:  # yamllint disable-line rule:truthy
   workflow_call:
   workflow_dispatch:
     inputs:
+      csm-version:
+        description: 'CSM program version, ex: v1.12.0, v1.13.0, ...'
+        required: true
       latest-version:
-        description: 'Version to update operator, ex: v2.0.0'
+        description: 'Latest operator version, ex: v1.7.0, v1.8.0, ...'
         required: true
       existing-version:
-        description: 'Existing operator version, ex: v1.0.0'
+        description: 'Existing operator version, ex: v1.6.0, 1.7.0, ...'
         required: true
 jobs:
   version-update:
@@ -17,4 +20,5 @@ jobs:
     with:
       latest-version: ${{ github.event.inputs.latest-version }}
       existing-version: ${{ github.event.inputs.existing-version }}
+      csm-version: ${{ github.event.inputs.csm-version }}
     secrets: inherit
