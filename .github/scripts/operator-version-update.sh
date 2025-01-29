@@ -42,7 +42,7 @@ pwd
         # part-2
         k_file="kustomization.yaml"
         for k_dir in {'config/install/','config/manager/'}; do
-        cd "$BASE_DIR/csm-operator/$k_dir"
+        cd "$GITHUB_WORKSPACE/$k_dir"
         sed -i "s/newTag: .*/newTag: ${op_version}/" $k_file
         done
         echo "Done updating kustomization.yaml"
@@ -50,17 +50,21 @@ pwd
 echo "part-3"
 pwd
 
-        cd "$BASE_DIR/csm-operator"
+        cd "$GITHUB_WORKSPACE"
         # part-3: update CSMVersion
         sed -i "s/CSMVersion = .*/CSMVersion = \"${csm_ver_v}\"/g" controllers/csm_controller.go
         echo "Done updating CSMVersion"
 
+echo "part-4"
+pwd
         # part-4
         sed -i "s/dell-csm-operator:.*/dell-csm-operator:${op_version}/g" deploy/olm/operator_community.yaml
         sed -i "s/dell-csm-operator:.*/dell-csm-operator:${op_version}/g" deploy/operator.yaml
         sed -i "s/CSMVersion: .*/CSMVersion: ${csm_ver_v}/g" deploy/operator.yaml
         echo "Done updating operator.yaml"
 
+echo "part-5"
+pwd
         # part-5
         d_file="docker.mk"
         sed -i "s/VERSION ?=.*/VERSION ?= ${op_version}/g" $d_file
@@ -69,10 +73,12 @@ pwd
         sed -i "s/example.com\/operator-catalog:.*/example.com\/operator-catalog:${op_version})./g" $d_file
         echo "Done updating docker.mk"
 
+echo "part-6"
+pwd
         # part-6
         file="dell-csm-operator.clusterserviceversion.yaml"
         for i_dir in {'bundle/manifests/','config/manifests/bases/'}; do
-            cd "$BASE_DIR/csm-operator/$i_dir"
+            cd "$GITHUB_WORKSPACE/$i_dir"
             sed -i "s/dell-csm-operator:.*/dell-csm-operator:${op_version}/g" $file
             sed -i "s/name: dell-csm-operator.v.*/name: dell-csm-operator.${op_version}/g" $file
             sed -i "s/- dell-csm-operator.v.*/- dell-csm-operator.${op_skip_version}/g" $file
