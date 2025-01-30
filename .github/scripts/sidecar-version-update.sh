@@ -37,20 +37,28 @@ for sidecar in {attacher,provisioner,snapshotter,registrar,resizer,external-heal
        for file in $files_to_be_modified
          do
             if [ $sidecar == 'attacher' ]; then
+            echo "$sidecar --> ${attacher_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${attacher_ver}|g" $file
             elif [ $sidecar == 'provisioner' ]; then
+             echo "$sidecar --> ${provisioner_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${provisioner_ver}|g" $file
             elif [ $sidecar == 'snapshotter' ]; then
+             echo "$sidecar --> ${snapshotter_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${snapshotter_ver}|g" $file
             elif [ $sidecar == 'registrar' ]; then
+             echo "$sidecar --> ${registrar_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${registrar_ver}|g" $file
             elif [ $sidecar == 'resizer' ]; then
+             echo "$sidecar --> ${resizer_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${resizer_ver}|g" $file
             elif [ $sidecar == 'external-health-monitor' ]; then
+             echo "$sidecar --> ${health_monitor_ver}"
              sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${health_monitor_ver}|g" $file
             elif [ $sidecar == 'sdc' ]; then
+             echo "$sidecar --> ${sdc_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${sdc_ver}|g" $file
             elif [ $sidecar == 'metadata-retriever' ]; then
+             echo "$sidecar --> ${metadata_retriever_ver}"
               sed -i "s|${old_sidecar_ver}|${old_sidecar_sub_string}:${metadata_retriever_ver}|g" $file
             fi
          done
