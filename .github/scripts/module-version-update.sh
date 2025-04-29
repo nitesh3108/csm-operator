@@ -39,6 +39,11 @@ pstore_driver_ver=${pstore_driver_ver//./}
 pmax_driver_ver=${pmax_driver_ver//./}
 pflex_driver_ver=${pflex_driver_ver//./}
 
+pscale_driver_ver="$(echo -e "${pscale_driver_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+pstore_driver_ver="$(echo -e "${pstore_driver_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+pmax_driver_ver="$(echo -e "${pmax_driver_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+pflex_driver_ver="$(echo -e "${pflex_driver_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+
 auth_v2_samples_format=${auth_v2//./}
 
 input_csm_ver="$1"
