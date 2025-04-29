@@ -34,6 +34,20 @@ pflex_driver_ver="$CSI_VXFLEXOS"
 dell_csi_replicator="$CSM_REPLICATION"
 dell_replication_controller="$CSM_REPLICATION"
 
+obs_ver="$(echo -e "${obs_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+auth_v2="$(echo -e "${auth_v2}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+rep_ver="$(echo -e "${rep_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+res_ver="$(echo -e "${res_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+revproxy_ver="$(echo -e "${revproxy_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+csm_ver="$(echo -e "${csm_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+pscale_matrics="$(echo -e "${pscale_matrics}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+pflex_matrics="$(echo -e "${pflex_matrics}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+pmax_matrics="$(echo -e "${pmax_matrics}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+topology="$(echo -e "${topology}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+otel_col="$(echo -e "${otel_col}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+dell_csi_replicator="$(echo -e "${dell_csi_replicator}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+dell_replication_controller="$(echo -e "${dell_replication_controller}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+
 pscale_driver_ver=${pscale_driver_ver//./}
 pstore_driver_ver=${pstore_driver_ver//./}
 pmax_driver_ver=${pmax_driver_ver//./}
@@ -48,14 +62,12 @@ auth_v2_samples_format=${auth_v2//./}
 
 input_csm_ver="$1"
 update_flag="$2"
+input_csm_ver="$(echo -e "${input_csm_ver}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+update_flag="$(echo -e "${update_flag}" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
 
 # Step-1:- <<<< Updating observability module version >>>>
 if [ -n $obs_ver ]; then
-      cd $GITHUB_WORKSPACE/operatorconfig/moduleconfig/observability
-      echo "module path--> start"
-      pwd
-      ls
-      echo "module path--> end" 
+      cd $GITHUB_WORKSPACE/operatorconfig/moduleconfig/observability 
       if [ -d $obs_ver ]; then
           if [[ "$update_flag" == "tag" ]]; then
              echo "Observability --> update flag received is --> tag"
