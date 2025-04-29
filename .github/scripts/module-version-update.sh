@@ -68,6 +68,7 @@ update_flag="$(echo -e "${update_flag}" | sed -e 's/^[[:space:]]*//' -e 's/[[:sp
 # Step-1:- <<<< Updating observability module version >>>>
 if [ -n $obs_ver ]; then
       cd $GITHUB_WORKSPACE/operatorconfig/moduleconfig/observability 
+      obs_ver="v22.22.22"
       if [ -d $obs_ver ]; then
           if [[ "$update_flag" == "tag" ]]; then
              echo "Observability --> update flag received is --> tag"
@@ -302,17 +303,18 @@ if [ -n $obs_ver ]; then
 
           # Update detailed samples
           cd $GITHUB_WORKSPACE/samples
-          st_cm_pflex=storage_csm_powerflex_"${pflex_driver_ver}".yaml
-          st_cm_pmax=storage_csm_powermax_"${pmax_driver_ver}".yaml
-          st_cm_pscale=storage_csm_powerscale_"${pscale_driver_ver}".yaml
-          st_cm_pstore=storage_csm_powerstore_"${pstore_driver_ver}".yaml
+          # st_cm_pflex=storage_csm_powerflex_"${pflex_driver_ver}".yaml
+          # st_cm_pmax=storage_csm_powermax_"${pmax_driver_ver}".yaml
+          # st_cm_pscale=storage_csm_powerscale_"${pscale_driver_ver}".yaml
+          # st_cm_pstore=storage_csm_powerstore_"${pstore_driver_ver}".yaml
 
-          echo "st_cm_pflex --> $st_cm_pflex"
-          echo "st_cm_pmax --> $st_cm_pmax"
-          echo "st_cm_pscale --> $st_cm_pscale"
-          echo "st_cm_pstore --> $st_cm_pstore"
+          # echo "st_cm_pflex --> $st_cm_pflex"
+          # echo "st_cm_pmax --> $st_cm_pmax"
+          # echo "st_cm_pscale --> $st_cm_pscale"
+          # echo "st_cm_pstore --> $st_cm_pstore"
           
-          for input_file in {$st_cm_pflex,$st_cm_pmax,$st_cm_pscale,$st_cm_pstore};
+          # for input_file in {$st_cm_pflex,$st_cm_pmax,$st_cm_pscale,$st_cm_pstore};
+          for input_file in {storage_csm_powerflex_${pflex_driver_ver}.yaml,storage_csm_powermax_${pmax_driver_ver}.yaml,storage_csm_powerscale_${pscale_driver_ver}.yaml,storage_csm_powerstore_${pstore_driver_ver}.yaml};
           do
              search_string1="name: observability"
              search_string2="enabled"
