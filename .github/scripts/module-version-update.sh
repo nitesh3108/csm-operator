@@ -47,8 +47,10 @@ update_flag="$2"
 # Step-1:- <<<< Updating observability module version >>>>
 if [ -n $obs_ver ]; then
       cd $GITHUB_WORKSPACE/operatorconfig/moduleconfig/observability
-      echo "module path"
+      echo "module path--> start"
       pwd
+      ls
+      echo "module path--> end" 
       if [ -d $obs_ver ]; then
           if [[ "$update_flag" == "tag" ]]; then
              echo "Observability --> update flag received is --> tag"
@@ -281,12 +283,9 @@ if [ -n $obs_ver ]; then
              sed -i "s|ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector.*|ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:${otel_col}|g" $file_to_be_updated
           fi
 
-      echo "before line number -->286"
-      ls
-      pwd
           # Update detailed samples
           cd $GITHUB_WORKSPACE/samples
-          for input_file in {storage_csm_powerflex_${pflex_driver_ver}.yaml,storage_csm_powermax_${pmax_driver_ver}.yaml,storage_csm_powerscale_${pscale_driver_ver}.yaml,storage_csm_powerstore_${pstore_driver_ver}.yaml};
+          for input_file in {"storage_csm_powerflex_${pflex_driver_ver}.yaml","storage_csm_powermax_${pmax_driver_ver}.yaml","storage_csm_powerscale_${pscale_driver_ver}.yaml","storage_csm_powerstore_${pstore_driver_ver}.yaml"};
           do
              search_string1="name: observability"
              search_string2="enabled"
@@ -308,10 +307,7 @@ if [ -n $obs_ver ]; then
                      fi
                   fi
              done < "$input_file"
-             pwd
-echo "After line number -->309"
-pwd
-ls 
+
              sed -i "s|quay.io/dell/container-storage-modules/csm-topology.*|quay.io/dell/container-storage-modules/csm-topology:nightly|g" $input_file
              if [ -n "$otel_col" ]; then
                 sed -i "s|ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector.*|ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector:${otel_col}|g" $input_file
