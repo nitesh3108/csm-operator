@@ -290,6 +290,14 @@ if [ -n $obs_ver ]; then
           st_cm_pscale="storage_csm_powerscale_${pscale_driver_ver}.yaml"
           st_cm_pstore="storage_csm_powerstore_${pstore_driver_ver}.yaml"
 
+          
+          # Remove any newline characters from the variables
+          st_cm_pflex="${st_cm_pflex//$'\n'/}"
+          st_cm_pmax="${st_cm_pmax//$'\n'/}"
+          st_cm_pscale="${st_cm_pscale//$'\n'/}"
+          st_cm_pstore="${st_cm_pstore//$'\n'/}"
+
+
           echo "st_cm_pflex --> $st_cm_pflex"
           echo "st_cm_pmax --> $st_cm_pmax"
           echo "st_cm_pscale --> $st_cm_pscale"
