@@ -1,0 +1,24 @@
+name: Update module versions in CSM-Operator
+# reusable workflow
+on:  # yamllint disable-line rule:truthy
+  workflow_call:
+  workflow_dispatch:
+    inputs:
+      csm-version:
+        description: 'CSM program version, ex: v1.12.0, v1.13.0, ...'
+        required: true
+      update-option:
+         description: 'Select the update flag, ex. "nightly" or "tag"'
+         required: true
+         type: choice
+         options:
+           - nightly
+           - tag
+jobs:
+  version-update:
+    uses: nitesh3108/common-github-actions/.github/workflows/module-version-update.yaml@main
+    name: Module version update
+    with:
+      csm-version: ${{ inputs.csm-version }}
+      update-option: ${{ inputs.update-option}}
+    secrets: inherit
