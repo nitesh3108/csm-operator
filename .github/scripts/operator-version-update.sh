@@ -64,7 +64,6 @@ if [[ "$update_flag" == "nightly" ]]; then
         d_file="docker.mk"
         sed -i "s/VERSION ?=.*/VERSION ?= ${op_version}/g" $d_file
         sed -i "s/BUNDLE_VERSION ?=.*/BUNDLE_VERSION ?= ${op_version_v}/g" $d_file
-        sed -i "s/e.g. - .*/e.g. - ${op_version}.001/g" $d_file
         sed -i "s/example.com\/operator-catalog:.*/example.com\/operator-catalog:${op_version})./g" $d_file
         echo "docker.mk updated"
 
